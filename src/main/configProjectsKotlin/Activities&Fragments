@@ -1,0 +1,96 @@
+ ----->UNIT 3 ----------------------------- INTRODUCTION AL LIFECYCLE OF THE ACTIVITIES---------------------------------
+         ----------------------------------       --  --
+         |         4.-RESUMED             |        |   | Activity has focus, o ciclo de vida interactivo
+         ----------------------------------        |  --
+         onResume     ↑      ↓  onPause            |
+         ----------------------------------        | Activity
+         |         3.-STARTED             |        | is visible
+         ----------------------------------       --
+onRestoreInstanceState
+         onStart     ▲      |   onStop
+         *onRestart  |      ▼   **onSaveInstanceState
+         ----------------------------------
+         |       2.- CREATED              |
+         ----------------------------------
+         onCreated   ↑      ↓   onDestroy
+         ---------------- -----------------
+         |1.-INITIALIZED| | 5.- DESTROYED |
+         ---------------- -----------------
+
+1.- onCreated(): Para crear la app, Aqui es donde se realiza la primera inicializacion, donde se configura
+                 el diseño por primera vez (aumentando su tamaño) y donde inizializas tus variables.
+
+2.- onStart(): para iniciarla y hacerla visible en pantalla
+
+3.- onResume(): Para poner atencion en la activity y prepararla de modo que el usuario interactue con ella.
+
+4.- onPause(): La app ya no tiene foco.
+
+5.- onStop(): La app deja de estar visible en pantalla.
+
+6.- onRestart(): Se llama a este metodo antes de que la activity regrese a visible de segundo plano,
+                 es muy similar a onCreate(), solo poner codigo que quieras llamar solamente si la
+                 actividad no se reinicia por primera vez
+
+7.- onDestroy(): Limpia los recursos que utiliza mi app
+
+8.- onSaveInstanceState() : Guarda una pequeña cantidad de datos que no queremos que se destruya cuando la activity
+                            se va de primer plano
+
+
+------->UNIT 3.1 ------------------- INTRODUCTION AL LIFECYCLE STATE OF FRAGMENTS ------------------------------
+1.- INICIADO: Se crea una nueva instancia de objeto
+2.- CREADO: Se llama a los primeros métodos del lifeCycle del fragmento. Tambien se creara la vista asociada al fragmento
+3.- COMENZADO: El fragmento está visible en pantalla, pero no tiene el "foco", lo cual no puede responder a las entradas de usuario.
+4.- REANUDADO: El fragmento está visible y tiene foco.
+5.- DESTRUIDO: Se eliminó la instancia de objeto del fragmento.
+
+==========>Anulaciones de metodos asociados al lifeCycle State<============
+        --
+        | onCreate() => Se crea la instancia de objeto. Sin embargo, todavia no se creo la vista correspondiente.
+CREATED | onCreatedView() => Metodo en el cual se aumenta el diseño. El fragmento pasa al estado CREATED.
+        | onViewCreated() => Se llama a este metodo despues de que se crea la vista. Por lo general en este metodo se
+        |                    debemos vincular las vistas especificas con propiedades llamando a findViewByID()
+        --
+        --
+STARTED | onStart() => Fragmento pasa al estado STARTED.
+        --
+        --
+RESUMED | onResume() => Fragmento tiene el foco (puede responder a las entradas de usuario)
+        --
+        --
+STARTED | onPause() => Fragmento pas de nuevo a STARTED. El usuario puede ver la UI.
+        --
+        --
+        | onStop() => Pasa de nuevo al CREATED. Se crearon instancias de objeto, pero ya no se presentan en pantalla
+CREATED | onDestroyView() => Se llama a este metodo justo antes de que el fragmento pase al estado DESTROYED. La
+        |                    vista ya se ha quitado de la memoria, pero el objeto del fragmento aun existe.
+        --
+          --
+DESTROYED | onDestroy() => Fragmento pasa a destroyed
+          --
+
+
+------->UNIT 3.3 ------------------------------- LIFECYCLE OF VIEWMODELS ----------------------------------------
+
+El viewModel no se destruye a los cambios de configuracion de la app. La instancia de app se vuelve a conectar
+a la instancia viewModel existente. Solo se destruye a cuando la actividad ha sido finalizada.
+
+-------------------------                           |---------------|  ViewModel created
+|    ActivityCreated    |          - onCreate       |               |
+-------------------------          - onStart        |               |
+-------------------------          - onResume       |               |
+|    Activity Rotate    |                           |               |
+-------------------------          - onPause        |               |
+                                   - onStop         |   ViewModel   |
+---------------------------------  - onDestroy      |               |
+| New Activity instance created |                   |               |
+---------------------------------  - onCreate       |               |
+                                   - onStart        |               |
+-------------------------------    - onResume       |               |
+|  finish() called from code  |                       |           |
+-------------------------------    - onPause             |     |
+                                   - onStop                 |
+------------------------           - onDestroy      ------------------
+|   Activity finished  |                            |  onCleared()   |  viewModel destroyed
+------------------------                            ------------------

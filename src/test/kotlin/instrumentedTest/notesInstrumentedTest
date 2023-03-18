@@ -1,0 +1,56 @@
+ Aqui se realizan las pruebas de interfaz de usuario (prueba UI). Permiten probar partes de la app
+ que dependen de los ciclos de vida de activities y fragments, además de los servicios y las API.
+ Dado que las pruebas de instrumentacion prueban la interfaz de usuario estas deben ejecutarse en
+ el emulador o dispositivo fisico ya que genera una apk diferente a la apk normal.
+
+ 1.- Las pruebas de instrumentacion requieren un InstrumentationTestRunner, que permite que se ejecute en un
+     dispositivo o emulador. Usaremos AndroidJunit4, aunque existen muchos otros ejecutores
+
+     @RunWith(AndroidJUnit4::class)
+     class ExampleInstrumentedTest {
+     }
+
+ 2.- Iniciar la actividad a probar dentro de la clase
+     @get:Rule()
+         val activity = ActivityScenarioRule(MainActivity::class.java)
+
+ 3.- Escribir la(s) lógicas de prueba
+     @RunWith(AndroidJUnit4::class)
+     class ExampleInstrumentedTest {
+         @get:Rule()
+         val activity = ActivityScenarioRule(MainActivity::class.java)
+
+         @Test
+         fun calculate_20_percent_tip() { }
+     }
+
+ 4.- Usaremos espresso: Biblioteca que se puede usar en cada proyecto android, y permite interactuar con los componentes
+     de IU a traves de código
+
+ 5.- Buscamos los componentes de la actividad
+     @RunWith(AndroidJUnit4::class)
+      class ExampleInstrumentedTest {
+
+          @get:Rule()
+          val activity = ActivityScenarioRule(MainActivity::class.java)
+
+          @Test
+          fun calculate_20_percent_tip() {
+             onView(withId(R.id.cost_of_service_edit_text))                 // seleccionamos el Id del elemento a utilizar
+                 .perform( typeText("50.00"))                               // ponemos texto simulado
+                 .perform( ViewActions.closeSoftkeyboard())                 // sirve para cerrar el teclado para editText, en caso de usar dispositivos pequeños
+
+             onView(withId(R.id.calculate))                                 // seleccionamos el btn
+                 .perform( click())                                         // ponemos el evento click
+
+             onView(withId(R.id.tip_result))                                //Seleccionamos el elemento a mostrar
+                 .check( matches(withText(containsString("$10.00"))))       //verificamos si coincide  el resultado
+          }
+      }
+
+
+
+
+
+
+  /*Add dependence in app/build.gradle */

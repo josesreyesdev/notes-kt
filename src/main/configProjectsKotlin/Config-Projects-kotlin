@@ -1,0 +1,310 @@
+
+/* EDITOR DE CÓDIGO EN LA WEB */
+https://developer.android.com/training/kotlinplayground
+
+/* CREACION DE UN PROYECTO KOTLIN */
+=> Minimum SDK = version minima ala que se puede ejecutar una app:
+   API 19: Android 4.4 (kitkat),se puede ejecutar en el 95% de dispositivos.
+=> Desmarcar la opcion: Use Legacy android.support.libraries
+
+
+
+------------------------------------ CONFIGURACION DE GRADLE (App) -------------------------------------------------
+1.- Configuracion de vista => permite que sea mucho más rápido y fácil de llamar a metodos en las vistas de la IU.
+    buildFeatures{
+        viewBinding true
+    }
+2.- Incluir la siguiente implementacion para añadir MDC(Material Desing Components) con la version mas actualizada
+    dependencies{
+        ...
+        implementation 'com.google.android.material:material:<version>'
+    }
+3.- NOTA: Para tener compatibilidad con iconos en versiones anteriores al API 21, agregar la siguiente dependencia
+    android {
+      defaultConfig {
+        ...
+        vectorDrawables.useSupportLibrary = true
+       }
+       ...
+    }
+
+==> IMPLEMENTACIONES PARA FRAGMENTS <==
+4.- Agregar las siguientes dependencias para el componente NAVIGATION
+    //Navigation
+        def nav_version = "2.5.2" //2.5.2
+
+        implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+        implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+        implementation 'androidx.fragment:fragment-ktx:1.5.1'
+
+5.- Dentro de plugins en la parte superior, agrega androidx.navigation.safeargs.kotlin.
+    plugins {
+        id 'com.android.application'
+        id 'kotlin-android'
+        id 'kotlin-kapt'
+    ==> id 'androidx.navigation.safeargs.kotlin'
+    }
+
+6.- Probar el componente de navegacion (NAVIGATION)
+    //Testing
+        testImplementation 'junit:junit:4.13.2'
+        androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+        androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+        androidTestImplementation 'androidx.navigation:navigation-testing:2.5.1'
+        androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:3.0.2'
+
+        implementation 'androidx.test.ext:junit-ktx:1.1.3'
+        implementation 'androidx.navigation:navigation-testing:2.5.1'
+        debugImplementation 'androidx.fragment:fragment-testing:1.5.2'
+
+
+==> IMPLEMENTACIONES PARA LA ARQUITECTURA DEL VIEWMODEL <==
+// ViewModel
+    def lifecycle_version = "2.5.1" //2.3.1
+
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version" //Se recomienda usar las versiones mas recientes
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
+
+=> Vinculacion de datos (liveData) -> Sole se utiliza en caso de vincular directamente con el xml
+   -> Reemplazar:
+   buildFeatures {
+      viewBinding = true
+   }
+   -> Por:
+   buildFeatures {
+      dataBinding = true
+   }
+   -> Para usar vinculacion de datos en cualquier proyecto kotlin debemos aplicar:
+   plugins {
+      id 'com.android.application'
+      id 'kotlin-android'
+  ==> id 'kotlin-kapt'
+   }
+   -> Para convertir un archivo de diseño a diseño de vinculacion de datos haz clic con el botón derecho en el
+   elemento raíz (ScrollView), selecciona Show Context Actions > Convert to data binding layout. En seguida van los data.
+   -> En el fragment, en el metodo onCreateView reemplazamos:
+   binding = GameFragmentBinding.inflate(inflater, container, false)
+   -> Por:
+   binding = DataBindingUtil.inflate(inflater, R.layout.game_fragment, container, false)
+
+review Doc con la implementacion: //LiveData implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+
+   ==> Test implementation para el viewModel
+   testImplementation 'junit:junit:4.+'
+   testImplementation 'androidx.arch.core:core-testing:2.1.0'
+
+==> IMPLEMENTACION DE SLIDINGPANELAYOUT (panel adapteable a varias pantallas)
+   //Sliding panel layout
+       implementation 'androidx.leanback:leanback:1.0.0'
+       implementation "androidx.slidingpanelayout:slidingpanelayout:1.2.0" //version mas reciente en: https://developer.android.com/jetpack/androidx/versions
+
+==> IMPLEMENTACIONES DE RETROFIT  <==
+    => Compatibilidad con java
+       android {
+         ...
+         compileOptions {
+           sourceCompatibility JavaVersion.VERSION_1_8
+           targetCompatibility JavaVersion.VERSION_1_8
+         }
+         kotlinOptions {
+           jvmTarget = '1.8'
+         }
+       }
+
+    => DEPENDENCIAS
+    //Navigation
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.1'
+
+    // Moshi => Analiza una respuesta JSON en un objeto de datos
+    implementation 'com.squareup.moshi:moshi-kotlin:1.9.3'
+
+    // Retrofit with Moshi Converter => Conectarse a un servicio web REST en internet y obtener una respuesta
+    implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
+
+    // Coil => carga y muestra la img => version mas recientes https://coil-kt.github.io/coil/#download
+    implementation "io.coil-kt:coil:2.2.1"
+
+
+    => Si no funcionan las dependencias anteriores de Moshi y Retrofit with moshi converter reemplazarlos por
+    /*// Retrofit
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    // Retrofit with Moshi Converter
+    implementation "com.squareup.retrofit2:converter-scalars:2.9.0" */
+
+==> IMPLEMENTACIONES PARA ROOM <==
+    //Room
+    def room_version = "2.4.3"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
+
+
+
+------------------------------------ CONFIGURACION DE GRADLE (Project) --------------------------------------------
+
+//PARA IMPLEMENTAR EN UN FRAGMENT
+1.- Agregar dependencia para Navigation => nav_version = "version actualizada"
+    buildscript {
+        ext {
+            appcompat_version = "1.2.0"
+            constraintlayout_version = "2.0.2"
+            core_ktx_version = "1.3.2"
+            kotlin_version = "1.3.72"
+            material_version = "1.2.1"
+            room_version = "2.4.3"
+      ====> nav_version = "2.3.1"
+        }
+        ...
+    }
+
+2.- Agregar Safe Args para la seguridad de tipos para pasar datos entre fragmentos
+    build.gradle a nivel de proyecto o superior, en buildscript > dependencies, agrega la siguiente Ruta de clase.
+
+    classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+
+==> Uso de RETROFIT -> verificar lo siguiente:
+    buildscript {
+        ...
+        repositories {
+            google() //android jetpack
+            jcenter() //Librerias externas como retrofit
+            mavenCentral() // librerias externas como coin
+        }
+        ...
+    }
+
+---------------------------------------------PERMISOS EN MANIFEST--------------------------------------------------
+==> Tipos de Permisos => https://developer.android.com/guide/topics/permissions/overview
+<uses-permission android:name="android.permission.INTERNET"/>
+
+---------------------------------------------- INSPECCIONAR CÓDIGO ------------------------------------------------
+ ==> Para analizar todo el archivo en busca de lineas grises de codigo que podemos mejorar
+    1.- Con el cursor en el archivo  seleccionamos Analyze > inspect Code en la barra de menu de android y aparecera
+        un cuadra de dialogo llamado Specify Inspection Scope.
+    2.- Elegimos la opcion que comienza con File y presionamos Ok. De esa manera limitamos la inspeccion a solo
+        MainActivity.kt
+    3.- Aparecera una ventana inspection Result.
+    4.- hacemos click en kotlin > Style issues para ver los mensajes
+    5.- Para cada opcion que podamos corregir presionamos Make "do"
+
+--------------------------------------------------- PROJECTS ------------------------------------------------------
+UNIT2
+==> 1.- Tip App, Analisis de Credito, DiceRoller (3) {
+            -> Activity, MDC(Material Design Components)
+        }
+==> 2.- Affirmations {
+            -> Uso de una activity, RecyclerView (adaptadores)
+        }
+==> 3.- Mascotas {
+            -> Activities, RecyclerView (Grid, Horizontal y vertical)
+            -> Intents
+       }
+UNIT3
+==> 4.- Words {
+            -> Activities, RecyclerView (Grid y Vertical)
+            -> Intent explicito(navega a una actividad especifica), Intent implicito (navega a contenido de otra app)
+            -> Menu (Add btn en la barra de la app)
+        }
+==> 5.- Words Fragments{
+            -> Activity, RecyclerView,
+            -> Intent (implicito)
+            -> Fragments (NavGraph -> Componente de navegacion, SafeArgs --> Pasar datos entre fragmentos de forma segura)
+            -> DataStore -> Guarda los cambios de configuracion de datos pequeños
+        }pp
+==> 6.- Unscramble{
+            -> Activity, Fragments
+            -> ViewModel, Dialogs (Alerta de Dialogo)
+            -> LiveData
+        }
+==> 5.- Cupcake Order{
+            -> Activity, Fragments
+            -> Navigation (nav_graph)
+            -> ViewModel, LiveData
+            -> Intent implicito (Email)
+            -> BackStack de activities o pila de actividades
+            -> plurals
+        }
+==> 6.- Lunch Tray App (No GitHub){
+            -> Activity, Fragments
+            -> Navigation (nav_graph)
+            -> ViewModel, LiveData
+            -> BackStack de activities o pila de actividades
+        }
+UNIT 4
+==> 7.- Mars photos{
+            -> ViewModel, LiveData
+            -> Retrofit (Biblioteca para conectar a un servicio web REST en internet y obtener una respuesta)
+            -> Moshi (Analiza la respuesta JSON en un objeto de datos)
+            -> Coil (cargar y mostrar una img de una url web)
+            -> RecyclerView
+        }
+==> 7.- Pokemon ApiRest{
+            -> ViewModel, LiveData
+            -> Retrofit (Biblioteca para conectar a un servicio web REST en internet y obtener una respuesta)
+            -> Moshi (Analiza la respuesta JSON en un objeto de datos)
+            -> Coil (cargar y mostrar una img de una url web)
+            -> RecyclerView
+        }
+==> 7.- Amphibians{
+            -> ViewModel, LiveData
+            -> Retrofit (Biblioteca para conectar a un servicio web REST en internet y obtener una respuesta)
+            -> Moshi (Analiza la respuesta JSON en un objeto de datos)
+            -> RecyclerView
+        }
+UNIT 5
+==> 7.- Llagadas de Autobuses{
+            -> Activity, Fragments, SafeArgs
+            -> ViewModel -> ViewModelFactory
+            -> Flow, LiveData
+            -> RecyclerView
+            -> Persistencia de Datos con Room( Entities, Dao, DataBase)
+        }
+==> 8.- Inventario{
+            -> Activity, Fragments, SafeArgs
+            -> ViewModel -> ViewModelFactory
+            -> Flow, LiveData
+            -> Persistencia de Datos con Room( Entities, Dao, DataBase)
+            -> RecyclerView
+        }
+==> 9.- AppExample2{
+            ->
+        }
+==> 10.- AppExample2{
+            ->
+        }
+---------------------------------------------------------ROAD-MAP----------------------------------------------------
+FACIL {
+    1.- Sintaxis
+    2.- Ejercicios de algoritmos
+    3.- IDE (Entorno de desarrollo), gradle ( ficheros que gestionan las dependencias) y el manifest (fichero que define el proyecto)
+    4.- Activities, Fragments y layouts
+    5.- Intent
+    6.- Persistencia de Datos (Shared Preferences, SQLite, Room, Data Store)
+    7.- Estilos, themes, MDC, MIU, glide o picasso
+    8.- Google maps
+    9.- Subir apps a la playStore(Admont, facebookAds)
+}
+INTERMEDIO{
+    1.- Programacion Orientada a objetos (POO)
+    2.- Dialogos y recyclerView
+    3.- Git (controls de versiones)
+    4.- Services, broadcast, content provider
+    5.- Permisos, gestion de permisos
+    6.- Intent
+    7.- Arquitectura (MVP, MVVM, MVI), clean arquitecture, principios solid
+    8.- Corrutinas e Hilos
+    9.- Work Manager
+    10.- Retrofit (Consumo de APIS), volley(no recomendado), conocer interceptor y okHttp
+    11.- Firebase
+}
+DIFICIL {
+    1.- Inyeccion de dependencias (Dager Hill) otras (Dager 2, Coin, Code in)
+    2.- Flows
+    3.- RX Java o RX Kotlin
+    4.- Live Data
+    5.- test (unitTest, instrumentedTest)
+    6.- integracion continua (gitHub actions)
+}
