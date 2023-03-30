@@ -60,9 +60,9 @@ https://developer.android.com/training/kotlinplayground
 
 ==> IMPLEMENTACIONES PARA LA ARQUITECTURA DEL VIEWMODEL <==
 // ViewModel
-    def lifecycle_version = "2.5.1" //2.3.1
+    def lifecycle_version = "2.5.1" //Se recomienda usar las versiones mas recientes
 
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version" //Se recomienda usar las versiones mas recientes
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
 
 => Vinculacion de datos (liveData) -> Sole se utiliza en caso de vincular directamente con el xml
@@ -213,7 +213,7 @@ UNIT3
             -> Intent (implicito)
             -> Fragments (NavGraph -> Componente de navegacion, SafeArgs --> Pasar datos entre fragmentos de forma segura)
             -> DataStore -> Guarda los cambios de configuracion de datos pequeños
-        }pp
+        }
 ==> 6.- Unscramble{
             -> Activity, Fragments
             -> ViewModel, Dialogs (Alerta de Dialogo)
