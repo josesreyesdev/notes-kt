@@ -3,7 +3,7 @@ package newsCodelabsGoogle.clasesyobjetos.example.myapp.decor
 /* Data class */
 data class Decoration( val rocks: String)
 
-data class Decoration2( val rocks: String, val wood: String, val diver: String) { }
+data class Decoration2( val rocks: String, val wood: String, val diver: String)
 
 /* Enum class */
 enum class Color( val rgb: Int) {
