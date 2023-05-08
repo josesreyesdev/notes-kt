@@ -1,4 +1,12 @@
+POO => (Object Orientation Programming)
 ENCAPSULAMIENTO => Es organizar o incluir todas las funciones relacionadas de forma lógica.
+                   La capacidad de ocultar la complejidad del objeto detrás de una interfaz sencilla y fácil de usar.
+HERENCIA(Inheritance) => Se da cuando una clase secundaria incluye (o hereda) todas las propiedades y los métodos
+            de su clase superior (esto le permite compartir y reutilizar código, lo que facilita la
+            comprensión y el mantenimiento de los programas).
+POLYMORPHISM => La capacidad de utilizar objetos de diferentes clases de manera intercambiable.
+ABSTRACTION => Capacidad de representar un objeto en el mundo real en terminos de propiedades relevantes.
+
 SUBPROCESO => Realizar tareas en segundo plano. Con varios subprocesos podemos ejecutar multiples
               secuencias de código a la vez.
 MULTIPROCESO => Es el uso de varios subprocesos.
@@ -9,9 +17,6 @@ JERARQUIA DE CLASES => Disposición en la que las clases se organizan en una jer
 ELEMENTO SECUNDARIO O SUBCLASE => Cualquier clase que esté debajo de otra clase en la jerarquía.
 CLASE SUPERIOR, SUPERCLASE O CLASE BASE => Cualquier clase con una o más clases secundarias.
 CLASE RAÍZ O NIVEL SUPERIOR => Clase en la parte superior (o raíz) de la jerarquía de la clase.
-HERENCIA => Se da cuando una clase secundaria incluye (o hereda) todas las propiedades y los métodos
-            de su clase superior (esto le permite compartir y reutilizar código, lo que facilita la
-            comprensión y el mantenimiento de los programas).
 
 CLASE ABSTRACTA: Es una clase de la que no se puede crear una instancia porque no se implementó por completo.
 
@@ -20,7 +25,7 @@ CONSTRUCTOR: Se le llama constructor cuando creas una instancia de objeto desde 
 EXTRA: Es un dato al que se le asigna un nombre que se puede recuperar mas adelante como un num o una string en un intent
 
 CONTEXT: Referencia al estado actual de la app, un activity o un fragmento. Contiene info sobre la activity, el fragment
-         o la app. Por lo genenral se usa para obtener acceso a los recursos, las bases de datos y otros servicios del sistema.
+         o la app. Por lo general se usa para obtener acceso a los recursos, las bases de datos y otros servicios del sistema.
 
 BUNDLE: Es una coleccion de pares clave-valor en las que las claves siempre son strings, podemos colocar valores
         simples como Int y Boolean
