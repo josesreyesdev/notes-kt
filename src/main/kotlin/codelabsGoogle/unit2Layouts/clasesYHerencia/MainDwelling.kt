@@ -34,7 +34,7 @@ fun main() {
         println("Carpet Size: ${calculateMaxCarpetSize()}")
     }
 
-    val roundTower = RoundTower( 4, 15.5)
+    val roundTower = RoundTower( residents = 4, radius = 15.5)
     with(roundTower) {
         println("\nRound Tower\n===============================")
         println("Capacity: $capacity")
@@ -59,7 +59,7 @@ abstract class Dwelling( private var residents: Int) {
 
     //Obtener habitacion
     fun getRoom() {
-        if (capacity > residents) {
+        if (capacity > residents) { //if (hasRoom())
             residents++
             println("You got a room!")
         } else {
@@ -75,7 +75,7 @@ abstract class Dwelling( private var residents: Int) {
     abstract fun floorArea(): Double
 }
 
-class SquareCabin(residents: Int, private val length: Double) : Dwelling( residents ) {
+class SquareCabin(residents: Int, private val length: Double) : Dwelling(residents) {
     override val buildingMaterial = "Wood/Madera"
     override val capacity = 6
     override fun floorArea(): Double {
@@ -83,7 +83,7 @@ class SquareCabin(residents: Int, private val length: Double) : Dwelling( reside
     }
 }
 
-open class RoundHut(residents: Int, private val radius: Double) : Dwelling( residents ) {
+open class RoundHut(residents: Int, private val radius: Double) : Dwelling(residents) {
     override val buildingMaterial = "Straw/Paja"
     override val capacity = 4
     override fun floorArea(): Double {
