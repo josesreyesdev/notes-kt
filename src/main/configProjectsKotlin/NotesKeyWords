@@ -4,8 +4,8 @@ ENCAPSULAMIENTO => Es organizar o incluir todas las funciones relacionadas de fo
 HERENCIA(Inheritance) => Se da cuando una clase secundaria incluye (o hereda) todas las propiedades y los métodos
             de su clase superior (esto le permite compartir y reutilizar código, lo que facilita la
             comprensión y el mantenimiento de los programas).
-POLYMORPHISM => La capacidad de utilizar objetos de diferentes clases de manera intercambiable.
-ABSTRACTION => Capacidad de representar un objeto en el mundo real en terminos de propiedades relevantes.
+POLYMORPHISM => Utilizar objetos de diferentes clases de manera intercambiable.
+ABSTRACTION => Representar un objeto en el mundo real en terminos de propiedades relevantes.
 
 SUBPROCESO => Realizar tareas en segundo plano. Con varios subprocesos podemos ejecutar multiples
               secuencias de código a la vez.

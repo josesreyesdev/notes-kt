@@ -3,13 +3,19 @@ package codelabsGoogle.unit1KotlinBasics.classDice
 fun main() {
 
     val myFirstDice = Dice(6)
-    println("Your ${myFirstDice.numSides} sided dice rolled ${myFirstDice.roll()}!")
+    with(myFirstDice) {
+        println("Your $numSides sided dice rolled ${roll()}!")
+    }
 
     val mySecondDice = Dice(20)
-    println("Your ${mySecondDice.numSides} sided dice rolled ${mySecondDice.roll()}!")
+    with(mySecondDice) {
+        println("Your $numSides sided dice rolled ${roll()}!")
+    }
 
     val myFirstCoin = Coin(4)
-    println("Your ${myFirstCoin.coins} monedas, al girar muestra: ${myFirstCoin.rollCoin()} moneda(s)")
+    with(myFirstCoin) {
+        println("Your $coins monedas, al girar muestra: ${rollCoin()} moneda(s)")
+    }
 }
 
 class Dice( val numSides: Int) {
