@@ -8,6 +8,7 @@ class Noodles : Item ("Noodles", 10) { //Fideos
     }
 }
 
+//class Vegetables (private val toppings: List<String>) : Item ( "Vegetables", 5) {
 class Vegetables (private vararg val toppings: String) : Item ( "Vegetables", 5) {
 
     override fun toString(): String {
@@ -64,7 +65,9 @@ fun printOrders() {
     orderList.add(order3)
 
     //patter builder => notacion de puntos
-    val order4 = Order(4).addItem(Noodles()).addAllItems(listOf(Noodles(), Vegetables("Carrots", "Beans", "Celery")))
+    val order4 = Order(4)
+        .addItem(Noodles())
+        .addAllItems(listOf(Noodles(), Vegetables("Carrots", "Beans", "Celery")))
     order4.addItem(Noodles()).addItem(Vegetables())
     orderList.add(order4)
 
@@ -79,8 +82,6 @@ fun printOrders() {
         order.print()
         println()
     }
-
-
 }
 
 fun main () {

@@ -21,6 +21,7 @@ fun listInt() {
 
     //Declaracion de una lista
     val numbers1 : List<Int> = listOf()
+    val numbers2 = listOf<Int>()
     val numbers = listOf(1, 2, 3, 4, 5, 6)
     println("List: $numbers")                                                       // List: [1, 2, 3, 4, 5, 6]
 
@@ -28,13 +29,13 @@ fun listInt() {
     println("Size: ${numbers.size}")                                                // Size: 6
 
     // Accediendo a los elementos de una lista
-    println("First Element: ${numbers.get(0)}")
-    println("First Element: ${numbers[0]}")
-    println("Third Element: ${numbers[2]}")
+    println("First element: ${numbers.get(0)}")
+    println("First element: ${numbers[0]}")
+    println("Third element: ${numbers[2]}")
     println("Last index: ${numbers.size - 1}")                                      //Last index: 5
     println("Last element: ${numbers[numbers.size - 1]}")                           //Last element: 6
     println("Last index: ${numbers.first()}")
-    println("Last Element: ${numbers.last()}")
+    println("Last element: ${numbers.last()}")
 
     // Saber si un elemento está dentro de mi lista
     println("Está 4 en numbers?: ${numbers.contains(4)}")
@@ -42,7 +43,7 @@ fun listInt() {
 
     // Ordenando la lista de forma inversa
     println("Reversed list: ${numbers.reversed()}")
-    println("Real List: $numbers")
+    println("Real list: $numbers")
 
     //ordenando una lista de numeros de orden alfabetico
     val numberList = listOf(4, 3, 6, 2, 9, 1)
@@ -58,7 +59,7 @@ fun listString() {
     println("Reversed list: ${colors.reversed()}")
 
     //Ordenando los elementos alfabeticamente
-    println("Sorted List: ${colors.sorted()}")
+    println("Sorted list: ${colors.sorted()}")
 }
 
 fun mutableList() {
@@ -76,10 +77,11 @@ fun mutableList() {
     println("Entrees: ${entrees.addAll(moreItems)}")
     println("Entrees: $entrees")
 
-    //Quitando los elementos de una listacon remove()
+    //Quitando los elementos de una lista con remove()
     entrees.remove("spaghetti")
     println("Entrees: $entrees")
 
+    //Intentando quitar un elemento que no existe en la lista
     println("Entrees: ${entrees.remove("rice")}")
 
     //Quitando el elemento por su indice con removeAt()

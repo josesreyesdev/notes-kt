@@ -59,7 +59,7 @@ abstract class Dwelling( private var residents: Int) {
 
     //Obtener habitacion
     fun getRoom() {
-        if (capacity > residents) { //if (hasRoom())
+        if (hasRoom()) { //capacity > residents
             residents++
             println("You got a room!")
         } else {
