@@ -92,6 +92,6 @@ fun sombreroSeleccionador() {
 fun getAnswer(): Int {
     print("Responde 1, 2, 3 ó 4 ==> ")
     val answer = readLine()?.toInt() as Int
-    if (answer == 1 || answer == 2 || answer == 3 || answer == 4) return answer
+    if (answer in 1..4) return answer // if (answer == 1 || answer == 2 || answer == 3 || answer == 4) return answer
     return getAnswer()
 }

@@ -19,12 +19,8 @@ fun main() {
     val oneWordCities = cities.toSet().toList().filter { !it.contains(" ")}.sorted()
     println(oneWordCities) //println("Jeddah, Bengaluru, Shenzhen, Tripoli, Lima, Mandalay")
 
-    //Ejemplo de separa una palabra
-    val word = "Hola"
-    val separate = word.toCharArray()
-    println(separate)
-    val shuffleWord = separate.shuffle()
-    println(shuffleWord)
-    println(shuffleWord.toString())
-
+    println()
+    //Ejemplo de separar una palabra
+    val word = "Hola".toCharArray()
+    println(word.contentToString())
 }

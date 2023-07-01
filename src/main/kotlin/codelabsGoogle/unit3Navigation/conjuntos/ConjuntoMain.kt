@@ -10,7 +10,6 @@ fun main() {
     *        DETERMINADA. LAS CLAVES SON UNICAS Y CADA UNA SE MAPEA A UN SOLO VALOR, PERO LOS VALORES PUEDEN TENER
     *        DUPLICADOS */
     mapas()
-
 }
 
 fun conjunto() {
@@ -47,7 +46,7 @@ fun mapas() {
     println()
 
     /* FOREACH => Hace un recorrido de cada elemento */
-    peopleAges.forEach { println("My name is ${it.key} and I have ${it.value} years old, ") }
+    peopleAges.forEach { println("${it.key} is ${it.value} years old, ") }
 
     /* MAP => Aplica una transformacion de cada elemento */
     println()

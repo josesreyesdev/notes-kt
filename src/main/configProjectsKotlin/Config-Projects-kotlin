@@ -93,6 +93,13 @@ review Doc con la implementacion: //LiveData implementation "androidx.lifecycle:
    testImplementation 'junit:junit:4.+'
    testImplementation 'androidx.arch.core:core-testing:2.1.0'
 
+   ==> Test de unidades
+   testImplementation 'org.mockito:mockito-core:3.12.4'
+
+   ==> Test de instrumentación para RecyclerView https://developer.android.com/reference/androidx/test/espresso/contrib/RecyclerViewActions
+   androidTestImplementation
+   'androidx.test.espresso:espresso-contrib:3.4.0' //Version mas reciente: https://developer.android.com/jetpack/androidx/releases/test?hl=es-419
+
 ==> IMPLEMENTACION DE SLIDINGPANELAYOUT (panel adapteable a varias pantallas)
    //Sliding panel layout
        implementation 'androidx.leanback:leanback:1.0.0'
@@ -197,6 +204,7 @@ UNIT2
         }
 ==> 2.- Affirmations {
             -> Uso de una activity, RecyclerView (adaptadores)
+            -> Instrumented Test
         }
 ==> 3.- Mascotas {
             -> Activities, RecyclerView (Grid, Horizontal y vertical)
