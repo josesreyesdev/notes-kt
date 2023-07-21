@@ -28,7 +28,7 @@ CONTEXT: Referencia al estado actual de la app, un activity o un fragmento. Cont
          o la app. Por lo general se usa para obtener acceso a los recursos, las bases de datos y otros servicios del sistema.
 
 BUNDLE: Es una coleccion de pares clave-valor en las que las claves siempre son strings, podemos colocar valores
-        simples como Int y Boolean
+        simples como Int y Boolean.
 
 FRAGMENT: Es una parte reutilizada de la UI.
 

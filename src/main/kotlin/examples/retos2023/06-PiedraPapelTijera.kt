@@ -40,7 +40,6 @@ fun rockPaperScissorLizardSpock(games: Array<Pair<Game, Game>>): String {
             } else playerTwo++
         }
     }
-    7
 
     return if (playerOne == playerTwo) "Empate" else if (playerOne > playerTwo) "Player One" else "Player Two"
 }

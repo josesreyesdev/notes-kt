@@ -124,6 +124,8 @@ fun bucleFor() {
     for (numDownTo in 5 downTo 1) print(numDownTo) // Going backward
     println()
     for (numStep in 3..6 step 2) print(numStep) // Prints: 35
+    println()
+    for (num in 0 until 5) print(num) // 01234
 }
 
 fun arrayRandom() {
