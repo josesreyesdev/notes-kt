@@ -1,6 +1,6 @@
 POO => (Object Orientation Programming)
 ENCAPSULAMIENTO => Es organizar o incluir todas las funciones relacionadas de forma lógica.
-                   La capacidad de ocultar la complejidad del objeto detrás de una interfaz sencilla y fácil de usar.
+                   Se logra atrvés de los modificadores de visibilidad: private, public, etc.
 HERENCIA(Inheritance) => Se da cuando una clase secundaria incluye (o hereda) todas las propiedades y los métodos
             de su clase superior (esto le permite compartir y reutilizar código, lo que facilita la
             comprensión y el mantenimiento de los programas).
