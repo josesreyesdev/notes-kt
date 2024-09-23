@@ -8,19 +8,11 @@ open class Title(
 
     constructor(titleDto: TitleDto) : this(
         name = titleDto.title,
-        releaseDate = (titleDto.year).toInt(),
-        durationInMinutes = parseRuntime(titleDto.runtime)
-        //(titleDto.runtime.substring(0, 2).replace(" ", "")).toInt()
+        releaseDate = (titleDto.year.substring(0, 4).trim()).toInt(),
+        //durationInMinutes = ParseData.parseRuntime(titleDto.runtime)
+        durationInMinutes = ParseData.newParseRuntime(titleDto.runtime)
+
     )
-
-    companion object {
-        private fun parseRuntime(runtime: String): Int {
-            val runtimeRegex: Regex = "\\d+".toRegex() // expresion regular para extraer los digitos
-            val matchResult: MatchResult? = runtimeRegex.find(runtime)
-
-            return matchResult?.value?.toIntOrNull() ?: 0
-        }
-    }
 
     //private var includedInThePlan: Boolean = false
     private var evaluationSum: Double = 0.0
@@ -70,7 +62,7 @@ open class Title(
     }
 
     override fun toString(): String {
-        return "Title: $name ($releaseDate), Duración en Minutos: $durationInMinutes min"
+        return "Title: $name ($releaseDate), Duración: $durationInMinutes min"
     }
 
 }

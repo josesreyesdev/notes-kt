@@ -2,10 +2,11 @@ package jsrdev.api_04.main
 
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
+import jsrdev.api_04.exceptions.ErrorConvertDurationException
 import jsrdev.api_04.model.Title
 import jsrdev.api_04.model.TitleDto
-import jsrdev.api_04.utils.Conf.API_KEY
-import jsrdev.api_04.utils.Conf.BASE_URL
+import jsrdev.api_04.util.Config.API_KEY
+import jsrdev.api_04.util.Config.BASE_URL
 import java.net.URI
 import java.net.URLEncoder
 import java.net.http.HttpClient
@@ -21,21 +22,35 @@ fun main() {
     // Preparar la URL codificada para la solicitud
     val movieUrl = buildMovieUrl(movieName)
 
-    // Realizar la solicitud HTTP
-    val json = fetchMovieData(movieUrl)
-    println(json)
+    try {
+        // Realizar la solicitud HTTP
+        val json = fetchMovieData(movieUrl)
+        println(json)
 
-    // Deserealize Json string to Kotlin object
-    val titleDto: TitleDto = deserializeJSON(json)
+        // Deserealize Json string to Kotlin object
+        val titleDto: TitleDto = deserializeJSON(json)
 
-    // Serielize kotlin object to Json string
-    //val jsonString = serializeObject(titleDto)
+        // Serielize kotlin object to Json string
+        //val jsonString = serializeObject(titleDto)
 
-    // convert TitleDto to Title class
-    val title = Title(titleDto)
+        // convert TitleDto to Title class
+        val title = Title(titleDto)
 
-    // Mostrar la respuesta de la API
-    displayResponse(title)
+        // Mostrar la respuesta de la API
+        displayResponse(title)
+
+    } catch (e: Exception) {
+        when (e) {
+            is ErrorConvertDurationException, is NumberFormatException,
+            is IllegalArgumentException, is NullPointerException,
+            is RuntimeException-> {
+                println("Exception: ${e.message}")
+            }
+            else -> throw e // Relanzamos si no es ninguna de las excepciones específicas
+        }
+    } finally {
+        println("Finished program")
+    }
 }
 
 fun getValidatedMovieName(): String {
