@@ -53,7 +53,7 @@ fun main() {
     }
 }
 
-fun getValidatedMovieName(): String {
+private fun getValidatedMovieName(): String {
 
     var movieName = requestMovieName()
     while (movieName.isNullOrBlank()) {
@@ -64,18 +64,18 @@ fun getValidatedMovieName(): String {
     return movieName.trim().lowercase()
 }
 
-fun requestMovieName(): String? {
+private fun requestMovieName(): String? {
     println("\nEnter the movie name:")
     return readLine()
 }
 
-fun buildMovieUrl(movieName: String): String {
+private fun buildMovieUrl(movieName: String): String {
     val encodedMovie = URLEncoder.encode(movieName, StandardCharsets.UTF_8)
     val movie = encodedMovie.replace("+", "%20")
     return "${BASE_URL}apikey=${API_KEY}&t=$movie"
 }
 
-fun fetchMovieData(url: String): String {
+private fun fetchMovieData(url: String): String {
     val client: HttpClient = HttpClient.newBuilder().build()
 
     val request: HttpRequest = HttpRequest.newBuilder()
@@ -88,11 +88,11 @@ fun fetchMovieData(url: String): String {
     return response.body()
 }
 
-fun deserializeJSON(json: String): TitleDto = GsonBuilder()
+private fun deserializeJSON(json: String): TitleDto = GsonBuilder()
     .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
     .create()
     .fromJson(json, TitleDto::class.java)
 
-//fun serializeObject(objectType: TitleDto): String = Gson().toJson(objectType)
+//private fun serializeObject(objectType: TitleDto): String = Gson().toJson(objectType)
 
-fun displayResponse(objectType: Title) = println("Response: $objectType")
+private fun displayResponse(objectType: Title) = println("Response: $objectType")
