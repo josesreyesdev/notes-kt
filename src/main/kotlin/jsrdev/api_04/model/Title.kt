@@ -9,12 +9,10 @@ open class Title(
     constructor(titleDto: TitleDto) : this(
         name = titleDto.title,
         releaseDate = (titleDto.year.substring(0, 4).trim()).toInt(),
-        //durationInMinutes = ParseData.parseRuntime(titleDto.runtime)
-        durationInMinutes = ParseData.newParseRuntime(titleDto.runtime)
-
+        durationInMinutes = ParseData.parseRuntime(titleDto.runtime)
     )
 
-    //private var includedInThePlan: Boolean = false
+    private var includedInThePlan: Boolean = false
     private var evaluationSum: Double = 0.0
 
     private var _evaluationCounter: Int = 0
@@ -62,7 +60,7 @@ open class Title(
     }
 
     override fun toString(): String {
-        return "Title: $name ($releaseDate), Duración: $durationInMinutes min"
+        return "(Title: $name ($releaseDate), Duración: $durationInMinutes min)"
     }
 
 }

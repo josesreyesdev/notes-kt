@@ -13,21 +13,20 @@ object ParseData {
 
     fun parseRuntime(runtime: String): Int {
 
-        // expresion regular para extraer los digitos
-        val runtimeRegex: Regex = "\\d+".toRegex()
-        val matchResult: MatchResult? = runtimeRegex.find(runtime)
-
-        return matchResult?.value?.toIntOrNull() ?: 0
-    }
-
-    fun newParseRuntime(runtime: String): Int {
         return if (runtime.contains("N/A")) {
             throw ErrorConvertDurationException("Cannot convert duration because it contains 'N/A'")
         } else {
-            try {
-                runtime.substring(0, 3).trim().toInt()
-            } catch (e: NumberFormatException) {
-                throw ErrorConvertDurationException("Error parsing duration: ${e.message}")
+            val regex = Regex("\\d+") // Expresión regular para encontrar solo los números
+            val matchResult = regex.find(runtime) // Busca el primer número en el string
+
+            if (matchResult != null) {
+                try {
+                    matchResult.value.toInt() // Convierte el número encontrado a Int
+                } catch (e: NumberFormatException) {
+                    throw ErrorConvertDurationException("Error parsing duration: ${e.message}")
+                }
+            } else {
+                throw ErrorConvertDurationException("No valid numeric duration found")
             }
         }
     }
